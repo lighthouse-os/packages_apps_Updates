@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.controller;
+package org.lighthouse.ota.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,10 +27,10 @@ import android.util.Log;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.Utils;
-import org.pixelexperience.ota.model.Update;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.lighthouse.ota.misc.Constants;
+import org.lighthouse.ota.misc.Utils;
+import org.lighthouse.ota.model.Update;
+import org.lighthouse.ota.model.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.misc;
+package org.lighthouse.ota.misc;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -34,12 +34,12 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.pixelexperience.ota.controller.UpdaterService;
-import org.pixelexperience.ota.model.MaintainerInfo;
-import org.pixelexperience.ota.model.Update;
-import org.pixelexperience.ota.model.UpdateBaseInfo;
-import org.pixelexperience.ota.model.UpdateInfo;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.lighthouse.ota.controller.UpdaterService;
+import org.lighthouse.ota.model.MaintainerInfo;
+import org.lighthouse.ota.model.Update;
+import org.lighthouse.ota.model.UpdateBaseInfo;
+import org.lighthouse.ota.model.UpdateInfo;
+import org.lighthouse.ota.model.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.File;

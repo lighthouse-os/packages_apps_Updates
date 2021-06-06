@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota;
+package org.lighthouse.ota;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,13 +23,13 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.Utils;
+import org.lighthouse.ota.misc.Constants;
+import org.lighthouse.ota.misc.Utils;
 
 public class UpdaterReceiver extends BroadcastReceiver {
 
     public static final String ACTION_INSTALL_REBOOT =
-            "org.pixelexperience.ota.action.INSTALL_REBOOT";
+            "org.lighthouse.ota.action.INSTALL_REBOOT";
 
     @Override
     public void onReceive(Context context, Intent intent) {
