@@ -23,6 +23,7 @@ public final class Constants {
     public static final String UNCRYPT_FILE_EXT = ".uncrypt";
     public static final String PROP_BUILD_DATE = "ro.build.date.utc";
     public static final String PROP_BUILD_TYPE = "ro.lighthouse.build.type";
+    public static final String PROP_BUILD_VARIANT = "ro.lighthouse.build.variant";
     public static final String PROP_RECOVERY_UPDATE = "persist.sys.recovery_update";
     public static final String PREF_CURRENT_PERSISTENT_STATUS = "current_persistent_status";
     public static final String PREF_INSTALLING_AB_ID = "installing_ab_id";

@@ -155,12 +155,19 @@ public class Utils {
         return SystemProperties.get(Constants.PROP_BUILD_TYPE, "");
     }
 
+    private static String getVariant(){
+        return SystemProperties.get(Constants.PROP_BUILD_VARIANT, "");
+    }
+
     public static String getServerURL() {
         String buildType = getBuildType();
+        String buildVariant = getVariant();
         if (buildType.equals("OFFICIAL")){
-            return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
-        }else{
-            return String.format(Constants.OTA_CI_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            if (buildVariant.equals("VANILLA")){
+                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), "-vanilla", SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            }else{
+                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            }
         }
     }
 
