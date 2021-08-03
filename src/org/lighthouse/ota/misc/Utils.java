@@ -163,11 +163,13 @@ public class Utils {
         String buildType = getBuildType();
         String buildVariant = getVariant();
         if (buildType.equals("OFFICIAL")){
-            if (buildVariant.equals("VANILLA")){
-                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), "-vanilla", SystemProperties.get(Constants.PROP_BUILD_VERSION));
-            }else{
+            if (buildVariant.equals("GAPPS")){
                 return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            }else{
+                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE) + "-vanilla", SystemProperties.get(Constants.PROP_BUILD_VERSION));
             }
+        }else{
+            return String.format(Constants.OTA_CI_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
         }
     }
 
