@@ -31,9 +31,9 @@ public final class Constants {
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
     static final String PROP_DEVICE = "ro.lighthouse.device";
     static final String PROP_BUILD_VERSION = "ro.lighthouse.build.version";
-    static final String OTA_URL = "https://raw.githubusercontent.com/Lighthouse-os/official_devices/raft/builds/%s.json";
-    static final String OTA_CI_URL = "https://raw.githubusercontent.com/Lighthouse-os/official_devices/raft/builds/%s.json";
+    static final String OTA_URL = "https://raw.githubusercontent.com/Lighthouse-os/official_devices/main/builds/%s.json";
+    static final String OTA_CI_URL = "https://raw.githubusercontent.com/Lighthouse-os/official_devices/main/builds/%s.json";
     static final String MAINTAINER_URL = "https://t.me/%s";
-    static final String DOWNLOAD_WEBPAGE_URL = "https://raw.githubusercontent.com/lighthouse-os/official_devices/raft/changelogs/%s/%s.txt";
+    static final String DOWNLOAD_WEBPAGE_URL = "https://raw.githubusercontent.com/lighthouse-os/official_devices/main/changelogs/%s/%s.txt";
     static final String EXPORT_PATH = "Lighthouse-Updates/";
 }
