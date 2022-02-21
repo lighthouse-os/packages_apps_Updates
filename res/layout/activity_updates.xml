@@ -83,7 +83,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/evolution_version"
+            android:id="@+id/lighthouse_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -95,7 +95,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/evolution_version_display"
+            android:id="@+id/lighthouse_version_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"

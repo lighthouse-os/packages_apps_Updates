@@ -42,15 +42,15 @@ android_app {
         proguard_flags_files: ["proguard.flags"],
     },
 
-    required: ["privapp_whitelist_org.evolution.ota.xml"],
+    required: ["privapp_whitelist_org.lighthouse.ota.xml"],
 
 }
 
 prebuilt_etc {
-    name: "privapp_whitelist_org.evolution.ota.xml",
+    name: "privapp_whitelist_org.lighthouse.ota.xml",
 
     system_ext_specific: true,
-    src: "privapp_whitelist_org.evolution.ota.xml",
+    src: "privapp_whitelist_org.lighthouse.ota.xml",
     sub_dir: "permissions",
 
 }
