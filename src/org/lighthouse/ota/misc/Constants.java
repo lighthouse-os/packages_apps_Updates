@@ -38,6 +38,7 @@ public final class Constants {
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
     static final String PROP_DEVICE = "ro.lighthouse.device";
     static final String PROP_BUILD_VERSION = "ro.lighthouse.version";
+    public static final String PROP_BUILD_VARIANT = "ro.lighthouse.build.variant";
     static final String OTA_URL = "https://raw.githubusercontent.com/Lighthouse-OS/official_devices/sailboat/builds/%s.json";
     static final String DOWNLOAD_WEBPAGE_URL = "https://raw.githubusercontent.com/Lighthouse-OS/official_devices/sailboat/changelogs/%s/%s.txt";
     public static final String DOWNLOAD_PATH = "/data/system_updates/";

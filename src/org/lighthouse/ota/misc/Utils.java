@@ -149,8 +149,17 @@ public class Utils {
         return null;
     }
 
+    private static String getVariant(){
+        return SystemProperties.get(Constants.PROP_BUILD_VARIANT, "");
+    }
+
     public static String getServerURL() {
-        return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_VERSION_CODE));
+        String buildVariant = getVariant();
+            if (buildVariant.equals("GAPPS")){
+                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            }else{
+                return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE) + "-vanilla", SystemProperties.get(Constants.PROP_BUILD_VERSION));
+            }
     }
 
     public static String getSecurityPatchLevel() {
