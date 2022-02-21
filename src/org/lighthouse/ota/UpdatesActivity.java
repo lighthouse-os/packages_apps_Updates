@@ -40,10 +40,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toast;
 import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -72,7 +69,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class UpdatesActivity extends UpdatesListActivity implements View.OnClickListener {
+public class UpdatesActivity extends UpdatesListActivity {
 
     private static final String TAG = "UpdatesActivity";
     private UpdaterService mUpdaterService;
@@ -90,17 +87,9 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
     private TextView updateStatus;
     private TextView androidVersion;
     private TextView lighthouseVersion;
-    private TextView lighthouseVersionDisplay;
     private TextView securityVersion;
     private TextView lastUpdateCheck;
     private String LastUpdateCheck;
-    public static String customURL;
-
-    public static Context contextExt;
-
-    // Tap counter
-    public static int mCounter = 0;
-    ImageView updateIcon;
 
     private SharedPreferences sharedPref;
 
@@ -131,13 +120,7 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        contextExt = getApplicationContext();
-
         setContentView(R.layout.activity_updates);
-
-        updateIcon = (ImageView) findViewById(R.id.update_ic);
-        updateIcon.setOnClickListener(this);
 
         FetchChangelog changelog = new FetchChangelog();
         changelog.execute();
@@ -150,7 +133,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
         updateStatus = findViewById(R.id.no_new_updates_view);
         androidVersion = findViewById(R.id.android_version);
         lighthouseVersion = findViewById(R.id.lighthouse_version);
-        lighthouseVersionDisplay = findViewById(R.id.lighthouse_version_display);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         lastUpdateCheck = findViewById(R.id.last_update_check);
         securityVersion = findViewById(R.id.security_version);
@@ -159,8 +141,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
                 .getString(R.string.android_version, Build.VERSION.RELEASE)));
         lighthouseVersion.setText(String.format(getResources()
                 .getString(R.string.lighthouse_version, SystemProperties.get("org.lighthouse.build_version"))));
-        lighthouseVersionDisplay.setText(String.format(getResources()
-                .getString(R.string.lighthouse_version_display, SystemProperties.get("org.lighthouse.version"))));
         securityVersion.setText(String.format(getResources()
                 .getString(R.string.security_patch_level), Utils.getSecurityPatchLevel()));
         lastUpdateCheck.setText(String.format(getResources()
@@ -221,25 +201,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
                 Animation.RELATIVE_TO_SELF, 0.5f);
         mRefreshAnimation.setInterpolator(new LinearInterpolator());
         mRefreshAnimation.setDuration(1000);
-    }
-
-    public static Context getContextExt(){
-        return contextExt;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case (R.id.update_ic): {
-                ++mCounter;
-                if (mCounter % 3 == 0) {
-                    Toast.makeText(this, "Someone found out a hidden menu!", Toast.LENGTH_LONG).show();
-                    showPreferencesDialog();
-                }
-                break;
-            }
-
-        }
     }
 
     private void handleExportStatusChanged(int status){
@@ -336,7 +297,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
         findViewById(R.id.recycler_view).setVisibility(View.GONE);
         androidVersion.setVisibility(View.VISIBLE);
         lighthouseVersion.setVisibility(View.VISIBLE);
-        lighthouseVersionDisplay.setVisibility(View.VISIBLE);
         securityVersion.setVisibility(View.VISIBLE);
         lastUpdateCheck.setVisibility(View.VISIBLE);
     }
@@ -349,7 +309,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
         findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
         androidVersion.setVisibility(View.GONE);
         lighthouseVersion.setVisibility(View.GONE);
-        lighthouseVersionDisplay.setVisibility(View.GONE);
         securityVersion.setVisibility(View.GONE);
         lastUpdateCheck.setVisibility(View.GONE);
 
@@ -374,7 +333,7 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, h:mm a");
             String date = simpleDateFormat.format(new Date());
 
-            Log.d(TAG, date);
+            Log.d("HRITIK", date);
 
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("LastUpdateCheck", date);
@@ -434,11 +393,9 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
     }
 
     private void downloadUpdatesList(final boolean manualRefresh) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        customURL = prefs.getString(Constants.PREF_CUSTOM_OTA_URL, Constants.OTA_URL);
         final File jsonFile = Utils.getCachedUpdateList(this);
         final File jsonFileTmp = new File(jsonFile.getAbsolutePath() + UUID.randomUUID());
-        String url = Utils.getServerURL(customURL);
+        String url = Utils.getServerURL();
         Log.d(TAG, "Checking " + url);
 
         DownloadClient.DownloadCallback callback = new DownloadClient.DownloadCallback() {
@@ -512,7 +469,6 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
         lastUpdateCheck.setVisibility(View.GONE);
         androidVersion.setVisibility(View.GONE);
         lighthouseVersion.setVisibility(View.GONE);
-        lighthouseVersionDisplay.setVisibility(View.GONE);
 
         if (mRefreshIconView == null) {
             mRefreshIconView = findViewById(R.id.menu_refresh);
@@ -544,25 +500,20 @@ public class UpdatesActivity extends UpdatesListActivity implements View.OnClick
         Spinner autoCheckInterval =
                 view.findViewById(R.id.preferences_auto_updates_check_interval);
         Switch dataWarning = view.findViewById(R.id.preferences_mobile_data_warning);
-        EditText customURLInput = view.findViewById(R.id.preferences_customOTAUrl);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         autoCheckInterval.setSelection(Utils.getUpdateCheckSetting(this));
-        customURLInput.setText(prefs.getString(Constants.PREF_CUSTOM_OTA_URL, Constants.OTA_URL));
         dataWarning.setChecked(prefs.getBoolean(Constants.PREF_MOBILE_DATA_WARNING, true));
 
         new AlertDialog.Builder(this, R.style.AppTheme_AlertDialogStyle)
                 .setTitle(R.string.menu_preferences)
                 .setView(view)
                 .setOnDismissListener(dialogInterface -> {
-                    String customURLStr = customURLInput.getText().toString();
                     prefs.edit()
                             .putInt(Constants.PREF_AUTO_UPDATES_CHECK_INTERVAL,
                                     autoCheckInterval.getSelectedItemPosition())
                             .putBoolean(Constants.PREF_MOBILE_DATA_WARNING,
                                     dataWarning.isChecked())
-                            .putString(Constants.PREF_CUSTOM_OTA_URL,
-                                    customURLStr)
                             .apply();
 
                     if (Utils.isUpdateCheckEnabled(this)) {

@@ -21,7 +21,6 @@ public final class Constants {
     public static final String AB_PAYLOAD_PROPERTIES_PATH = "payload_properties.txt";
     public static final String PREF_AUTO_UPDATES_CHECK_INTERVAL = "auto_updates_check_interval";
     public static final String PREF_MOBILE_DATA_WARNING = "pref_mobile_data_warning";
-    public static final String PREF_CUSTOM_OTA_URL = "pref_custom_ota_url";
     public static final String PREF_NEEDS_REBOOT_ID = "needs_reboot_id";
     public static final String UNCRYPT_FILE_EXT = ".uncrypt";
     public static final String PROP_BUILD_DATE = "ro.lighthouse.build.datetime";
@@ -39,7 +38,8 @@ public final class Constants {
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
     static final String PROP_DEVICE = "ro.lighthouse.device";
     static final String PROP_BUILD_VERSION = "ro.lighthouse.version";
-    public static final String OTA_URL = "https://raw.githubusercontent.com/Lighthouse-Devices/official_devices/sailboat/";
+    static final String OTA_URL = "https://raw.githubusercontent.com/Lighthouse-OS/official_devices/sailboat/builds/%s.json";
+    static final String DOWNLOAD_WEBPAGE_URL = "https://raw.githubusercontent.com/Lighthouse-OS/official_devices/sailboat/changelogs/%s/%s.txt";
     public static final String DOWNLOAD_PATH = "/data/system_updates/";
     static final String EXPORT_PATH = "Lighthouse-Updates/";
     public static String fileName = "";

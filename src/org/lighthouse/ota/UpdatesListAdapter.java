@@ -462,9 +462,6 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
     }
 
     private void startActionMode(final UpdateInfo update, final boolean canDelete, View anchor) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
-        String customURL = preferences.getString(Constants.PREF_CUSTOM_OTA_URL, Constants.OTA_URL);
-
         mSelectedDownload = update.getDownloadId();
         mSelectedUpdate = update;
         notifyItemChanged(update.getDownloadId());
@@ -489,7 +486,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
                 case R.id.menu_copy_url:
                     Utils.addToClipboard(mActivity,
                             mActivity.getString(R.string.label_download_url),
-                            Utils.getDownloadWebpageUrl(customURL, update.getName()),
+                            Utils.getDownloadWebpageUrl(update.getName()),
                             mActivity.getString(R.string.toast_download_url_copied));
                     return true;
                 case R.id.menu_export_update:

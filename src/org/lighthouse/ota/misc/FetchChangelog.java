@@ -2,11 +2,6 @@ package org.lighthouse.ota.misc;
 
 import android.os.AsyncTask;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import androidx.preference.PreferenceManager;
-
-import org.lighthouse.ota.UpdatesActivity;
 import org.lighthouse.ota.UpdatesListAdapter;
 
 import java.io.BufferedReader;
@@ -19,15 +14,11 @@ import java.net.URL;
 public class FetchChangelog extends AsyncTask {
 
     private String changelog = "";
-    public String customURL;
 
     @Override
     protected Object doInBackground(Object[] objects) {
         try {
-            Context applicationContext = UpdatesActivity.getContextExt();
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-            customURL = prefs.getString(Constants.PREF_CUSTOM_OTA_URL, Constants.OTA_URL);
-            URL url = new URL(String.format(customURL + "/changelogs/%s/%s.txt",
+            URL url = new URL(String.format(Constants.DOWNLOAD_WEBPAGE_URL,
                     Utils.getDeviceCodeName(), Constants.fileName));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
@@ -36,7 +27,7 @@ public class FetchChangelog extends AsyncTask {
             while (line != null) {
                 line = bufferedReader.readLine();
                 if (line != null && !line.trim().equals(""))
-                    changelog = changelog + line + "\n";
+                    changelog = changelog + "- " + line + "\n";
             }
         } catch (IOException e) {
             e.printStackTrace();
