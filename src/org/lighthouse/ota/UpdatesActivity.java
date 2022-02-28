@@ -140,7 +140,7 @@ public class UpdatesActivity extends UpdatesListActivity {
         androidVersion.setText(String.format(getResources()
                 .getString(R.string.android_version, Build.VERSION.RELEASE)));
         lighthouseVersion.setText(String.format(getResources()
-                .getString(R.string.lighthouse_version, SystemProperties.get("org.lighthouse.build_version"))));
+                .getString(R.string.lighthouse_version, SystemProperties.get("ro.lighthouse.version"))));
         securityVersion.setText(String.format(getResources()
                 .getString(R.string.security_patch_level), Utils.getSecurityPatchLevel()));
         lastUpdateCheck.setText(String.format(getResources()
